@@ -50,6 +50,7 @@ from acme.utils import loggers
 from acme.jax import variable_utils
 from custom_variable_utils import RayVariableClient
 
+from acme.agents.jax.dqn import DQNConfig
 from acme.agents.jax.dqn.agent import DQNFromConfig
 from acme.agents.jax.dqn import learning
 import custom_learning_lib
