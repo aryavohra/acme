@@ -299,7 +299,7 @@ class ActorRay():
     result = self._env_loop.run_episode()
 
     while result["episode_return"] < args.episode_return_goal and \
-          result["counts"] < args.total_learning_steps and \
+          #result["counts"] < args.total_learning_steps and \
           not ray.get(self._shared_storage.get_info.remote("terminate")):
 
       result.update({
