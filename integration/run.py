@@ -485,11 +485,12 @@ if __name__ == '__main__':
       steps += result['episode_length']
       result = loop.run_episode()
 
+    counts = result["counts"]
     print("******************************************")
     print("*****         TEST COMPLETE         *****")
     print("******************************************")
     print(f"Single-actor test reached episode_return_goal of {args.episode_return_goal}!")
-    print(f"Took {result["counts"]} learner steps.")
+    print(f"Took {counts} learner steps.")
     print(f"Took {steps} self-play transitions.") 
   else:
     # custom Ray Actor and Learner
