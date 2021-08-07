@@ -313,7 +313,7 @@ class ActorRay():
     print("*****         TEST COMPLETE         *****")
     print("******************************************")
     print(f"Single-actor test reached episode_return_goal of {args.episode_return_goal}!")
-    print(f"Took {result["counts"]} learner steps.")
+    print(f"Took {result.get("counts", 0)} learner steps.")
     print(f"Took {steps} self-play transitions.")
 
 
