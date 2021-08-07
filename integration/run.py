@@ -298,10 +298,8 @@ class ActorRay():
     steps=0
     result = self._env_loop.run_episode()
 
-    while result["episode_return"] < args.episode_return_goal and \
+    while result["episode_return"] < args.episode_return_goal and not ray.get(self._shared_storage.get_info.remote("terminate")):
           #result["counts"] < args.total_learning_steps and \
-          not ray.get(self._shared_storage.get_info.remote("terminate")):
-
       result.update({
         "id": self._id
         })
@@ -310,12 +308,12 @@ class ActorRay():
 
       result = self._env_loop.run_episode()
       
-    counts = result["counts"]
+    #counts = result["counts"]
     print("******************************************")
     print("*****         TEST COMPLETE         *****")
     print("******************************************")
     print(f"Single-actor test reached episode_return_goal of {args.episode_return_goal}!")
-    print(f"Took {counts} learner steps.")
+    #print(f"Took {counts} learner steps.")
     print(f"Took {steps} self-play transitions.")
 
 
@@ -481,17 +479,17 @@ if __name__ == '__main__':
     steps=0
     result = loop.run_episode()
 
-    while result["episode_return"] < args.episode_return_goal and result["counts"] < args.total_learning_steps:
+    while result["episode_return"] < args.episode_return_goal:# and result["counts"] < args.total_learning_steps:
       logger.write(result)
       steps += result['episode_length']
       result = loop.run_episode()
 
-    counts = result["counts"]
+    #counts = result["counts"]
     print("******************************************")
     print("*****         TEST COMPLETE         *****")
     print("******************************************")
     print(f"Single-actor test reached episode_return_goal of {args.episode_return_goal}!")
-    print(f"Took {counts} learner steps.")
+    #print(f"Took {counts} learner steps.")
     print(f"Took {steps} self-play transitions.") 
   else:
     # custom Ray Actor and Learner
