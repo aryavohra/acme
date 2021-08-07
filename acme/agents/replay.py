@@ -32,6 +32,7 @@ class ReverbReplay:
   data_iterator: Iterator[reverb.ReplaySample]
   client: Optional[reverb.Client] = None
   can_sample: Callable[[], bool] = lambda: True
+  address: str = None
 
 
 def make_reverb_prioritized_nstep_replay(
@@ -66,7 +67,7 @@ def make_reverb_prioritized_nstep_replay(
       signature=adders.NStepTransitionAdder.signature(environment_spec,
                                                         extra_spec),
   )
-  server = reverb.Server([replay_table], port=None)
+  server = reverb.Server([replay_table], port=8000)
 
   # The adder is used to insert observations into replay.
   address = f'localhost:{server.port}'
@@ -81,7 +82,7 @@ def make_reverb_prioritized_nstep_replay(
       batch_size=batch_size,
       prefetch_size=prefetch_size,
   ).as_numpy_iterator()
-  return ReverbReplay(server, adder, data_iterator, client=client)
+  return ReverbReplay(server, adder, data_iterator, client=client, address=address)
 
 
 def make_reverb_online_queue(
@@ -166,3 +167,4 @@ def make_reverb_prioritized_sequence_replay(
       prefetch_size=prefetch_size,
   ).as_numpy_iterator()
   return ReverbReplay(server, adder, data_iterator, client)
+  
