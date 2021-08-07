@@ -99,7 +99,7 @@ class CustomEnvironmentLoop(core.Worker):
       # Have the agent observe the timestep and let the actor update itself.
       self._actor.observe(action, next_timestep=timestep)
       if self._should_update:
-        self._actor.update(wait=self._should_wait)
+        self._actor.update() #wait=self._should_wait) not sure why it's bugging out
 
       # Book-keeping.
       episode_steps += 1
