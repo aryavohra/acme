@@ -454,7 +454,7 @@ if __name__ == '__main__':
   if args.num_actors == 1:
     # bone stock Acme DQN
 
-    network = network_factory(ram_states, spec)
+    network = network_factory(args.ram_states, spec)
     environment = environment_factory(args.ram_states)
     agent = DQNFromConfig(
       environment_spec=spec,
