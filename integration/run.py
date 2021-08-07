@@ -54,7 +54,7 @@ from acme.agents.jax.dqn.agent import DQNFromConfig
 from acme.agents.jax.dqn import learning
 import custom_learning_lib
 
-from environment_loop import CustomEnvironmentLoop
+from custom_environment_loop import CustomEnvironmentLoop
 from custom_config import RainbowDQNConfig
 
 
